@@ -1,4 +1,4 @@
-# AI Resume Analyzer & Job Match Engine
+# AI Resume Analyzer & Job Match Engine ✨ (Premium UI)
 
 A modern SaaS-style web application that uses AI to analyze resumes and provide job matching capabilities. Users can upload their resumes to receive ATS scores, skill gap analysis, and AI-powered improvement suggestions.
 
