@@ -1,250 +1,115 @@
-# AI Resume Analyzer & Job Match Engine ✨ (Premium UI)
+# 🚀 AI Resume Analyzer & Job Match Engine (Premium UI)
 
-A modern SaaS-style web application that uses AI to analyze resumes and provide job matching capabilities. Users can upload their resumes to receive ATS scores, skill gap analysis, and AI-powered improvement suggestions.
+<div align="center">
+  <img src="https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js" alt="Next.js" />
+  <img src="https://img.shields.io/badge/FastAPI-0.100.0-05998b?style=for-the-badge&logo=fastapi" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/OpenAI-GPT--4-412991?style=for-the-badge&logo=openai" alt="OpenAI" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+</div>
 
-## 🖼️ Preview
+<p align="center">
+  <b>A state-of-the-art AI-powered platform for resume analysis, ATS scoring, and semantic job matching.</b>
+</p>
 
-### Landing Page
-![Landing Page](public/screenshots/landing.png)
+---
 
-### User Dashboard
-![Dashboard](public/screenshots/dashboard.png)
+## 💎 Premium Design & UX
 
-## 🚀 Features
+Our platform is engineered with a focus on **visual excellence** and **intuitive user experience**:
+- **Glassmorphic UI**: Sleek, modern interface with subtle backdrop blurs and gradients.
+- **Dynamic Animations**: Smooth transitions powered by Framer Motion.
+- **Interactive Dashboards**: Real-time data visualization with Recharts.
+- **Responsive Design**: Flawless experience across desktop, tablet, and mobile.
 
-### Resume Analysis
-- **ATS Score Calculation**: Evaluates resume compatibility with Applicant Tracking Systems
-- **Skill Extraction**: Uses NLP (spaCy) to identify technical and soft skills
-- **Keyword Matching**: Analyzes keyword density relevant to job requirements
-- **Experience Analysis**: Parses work experience, education, and projects
+## 🌟 Core Features
 
-### AI-Powered Insights
-- **Skill Gap Analysis**: Identifies missing skills compared to target roles
-- **Resume Improvement Suggestions**: Provides AI-generated recommendations
-- **Bullet Point Optimization**: Rewrites weak bullet points using the STAR method
-- **Weakness Detection**: Identifies problematic sections in the resume
+### 🧠 AI-Powered Analysis
+- **Intelligent ATS Scoring**: Advanced algorithm evaluates resume structure and content against industry standards.
+- **NLP Skill Extraction**: Automatically identifies technical and soft skills using spaCy and modern transformers.
+- **AI Career Coaching**: Receive tailored improvement suggestions powered by OpenAI GPT-4.
+- **Bullet Point Optimizer**: Refines weak descriptions using the STAR method for maximum impact.
 
-### Job Matching
-- **Embedding-Based Matching**: Uses sentence transformers for semantic similarity
-- **Top Job Matches**: Returns top 3 job role matches with percentage scores
-- **Predefined Roles**: Supports Software Engineer, Backend Developer, Frontend Developer, Data Scientist, ML Engineer
-- **Customizable Profiles**: Ability to add custom job profiles
+### 🎯 Semantic Job Matching
+- **Vector Embeddings**: Uses `all-MiniLM-L6-v2` for deep semantic understanding of your experience.
+- **Percentage Match Scoring**: Get a quantified compatibility score for various tech roles.
+- **Skill Gap Detection**: Highlights exactly what you need to learn to land your dream job.
 
-### User Dashboard
-- **Resume History**: Track all analyzed resumes
-- **Improvement Trends**: Visualize resume improvement over time
-- **Score Tracking**: Monitor ATS scores and keyword matches
-- **Report Generation**: Export detailed analysis reports
+### 📊 Comprehensive Dashboard
+- **Analysis History**: Securely tracks all your resume versions and improvements.
+- **Visual Analytics**: Interactive charts showing your career growth and score trends.
+- **Instant Previews**: Quick-look summaries of your most recent analysis.
 
 ## 🛠️ Tech Stack
 
-### Backend
-- **Framework**: FastAPI (Python)
-- **Database**: PostgreSQL with SQLAlchemy ORM
-- **Authentication**: JWT with secure password hashing
-- **NLP**: spaCy for entity extraction
-- **Embeddings**: Sentence Transformers for semantic similarity
-- **Document Processing**: pdfplumber (PDF) and python-docx (DOCX)
-
-### Frontend
-- **Framework**: Next.js 14
-- **Styling**: Tailwind CSS with custom components
-- **UI Library**: shadcn/ui-inspired components
-- **Icons**: Lucide React
-- **Animations**: Framer Motion
-- **Charts**: Recharts for data visualization
-
-### AI/ML Components
-- **LLM Integration**: OpenAI GPT API (with fallback implementation)
-- **Sentence Transformers**: all-MiniLM-L6-v2 model
-- **NLP Processing**: Named Entity Recognition with spaCy
+| Layer | Technology |
+| :--- | :--- |
+| **Frontend** | Next.js 14, Tailwind CSS, Framer Motion, Recharts, Lucide Icons |
+| **Backend** | FastAPI, SQLAlchemy ORM, Pydantic |
+| **Database** | PostgreSQL |
+| **AI / ML** | OpenAI GPT API, Sentence Transformers (NLP), spaCy |
+| **DevOps** | Docker, Docker Compose, GitHub Actions |
 
 ## 📁 Project Structure
 
-```
+```bash
 root/
 ├── backend/
 │   └── app/
-│       ├── main.py                 # Application entry point
-│       ├── config.py              # Configuration settings
-│       ├── database.py            # Database setup
-│       ├── models.py              # Database models
-│       ├── auth/                  # Authentication module
-│       ├── routes/                # API routes
-│       ├── services/              # Business logic
-│       └── utils/                 # Utility functions
+│       ├── auth/             # JWT & OAuth logic
+│       ├── routes/           # API Endpoints (Analysis, Jobs, Auth)
+│       ├── services/         # Business logic (LLM, Parser, Job Matching)
+│       ├── models.py         # SQLAlchemy schemas
+│       └── main.py           # Entry point
 ├── frontend/
-│   ├── pages/                     # Next.js pages
-│   ├── components/                # Reusable components
-│   ├── hooks/                     # Custom React hooks
-│   ├── styles/                    # Global styles
-│   └── utils/                     # Utility functions
-├── docker-compose.yml             # Container orchestration
-├── requirements.txt               # Python dependencies
-└── README.md                     # Project documentation
+│   ├── components/           # History, UploadBox, Stats, CircularProgress
+│   ├── pages/                # Upload, Dashboard, Stats, Analysis
+│   ├── styles/               # Glassmorphism & Global CSS
+│   └── utils/                # API integration
+├── docker-compose.yml        # Multi-container setup
+└── requirements.txt          # Backend dependencies
 ```
 
-## 🔧 Setup Instructions
+## 🚀 Rapid Setup
 
-### Prerequisites
-- Python 3.8+
-- Node.js 18+
-- PostgreSQL
-- Docker (optional, for containerization)
-
-### Backend Setup
-
-1. **Install Python dependencies**:
-```bash
-pip install -r requirements.txt
-```
-
-2. **Set up environment variables**:
-```bash
-# Create .env file in backend/app/
-DATABASE_URL=postgresql://user:password@localhost/resume_analyzer
-SECRET_KEY=your-super-secret-key-change-in-production
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-OPENAI_API_KEY=your-openai-api-key  # Optional
-```
-
-3. **Initialize the database**:
-```bash
-# Make sure PostgreSQL is running
-# Run database migrations (or create tables manually)
-```
-
-4. **Download spaCy model**:
-```bash
-python -m spacy download en_core_web_sm
-```
-
-5. **Run the backend**:
+### 1. Backend Configuration
 ```bash
 cd backend
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+# Create and activate virtualenv
+python -m venv venv
+source venv/bin/activate  # Or venv\Scripts\activate on Windows
+
+# Install dependencies
+pip install -r ../requirements.txt
+python -m spacy download en_core_web_sm
+
+# Configure .env
+cp .env.example .env # Add your DATABASE_URL and OPENAI_API_KEY
 ```
 
-### Frontend Setup
-
-1. **Install dependencies**:
+### 2. Frontend Configuration
 ```bash
 cd frontend
 npm install
-```
-
-2. **Set environment variables**:
-```bash
-# Create .env.local in frontend/
-NEXT_PUBLIC_API_URL=http://localhost:8000
-```
-
-3. **Run the development server**:
-```bash
 npm run dev
 ```
 
-## 🐳 Docker Deployment
-
-To run the application using Docker:
-
-1. **Build and start containers**:
+### 3. Docker (Recommend for Development)
 ```bash
 docker-compose up --build
 ```
 
-2. **Access the application**:
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:8000
-   - Database: PostgreSQL on port 5432
+## 🤖 Future Roadmap
 
-## 📊 API Endpoints
-
-### Authentication
-- `POST /auth/token` - Login and get JWT token
-- `POST /auth/register` - Register new user
-
-### Resume Management
-- `POST /resume/upload` - Upload and parse resume
-- `GET /resume/history` - Get user's resume upload history
-
-### Resume Analysis
-- `POST /analysis/{resume_id}/analyze` - Analyze a resume
-- `GET /analysis/{resume_id}/analysis` - Get analysis results
-
-### Job Matching
-- `GET /jobs/roles` - Get available job roles
-- `POST /jobs/seed-roles` - Initialize predefined job roles
-- `GET /jobs/{resume_id}/matches` - Get job matches for a resume
-
-## 🤖 AI/ML Implementation Details
-
-### Resume Parsing
-- PDF extraction using pdfplumber
-- DOCX extraction using python-docx
-- NLP processing with spaCy for entity recognition
-- Regex-based extraction for contact information
-
-### Embedding-Based Job Matching
-- Sentence transformers for semantic similarity
-- Cosine similarity for matching resumes to job descriptions
-- Combined scoring algorithm (skill match + content similarity)
-
-### LLM Integration
-- OpenAI GPT API for intelligent suggestions
-- Fallback implementation for offline capability
-- Structured prompt engineering for consistent responses
-
-## 🎨 UI/UX Highlights
-
-### Design Principles
-- Clean, modern SaaS aesthetic
-- Responsive design for mobile and desktop
-- Consistent color scheme and typography
-- Intuitive navigation and user flows
-
-### Key Components
-- Interactive progress rings for score visualization
-- Drag-and-drop resume upload interface
-- Tabbed analysis report views
-- Skill gap visualization charts
-- Before/after comparison for resume improvements
-
-## 🚀 Production Deployment
-
-### Backend Production Setup
-- Use a production WSGI server (Gunicorn)
-- Configure SSL certificates
-- Set up environment-specific configurations
-- Implement monitoring and logging
-
-### Frontend Production Build
-- Run `npm run build` to create optimized build
-- Serve static files through CDN
-- Implement caching strategies
-- Set up CI/CD pipelines
-
-### Security Considerations
-- Secure JWT implementation
-- Input validation and sanitization
-- File upload security measures
-- Rate limiting for API endpoints
-- HTTPS enforcement
-
-## 📈 Future Enhancements
-
-- Advanced NLP for more accurate skill extraction
-- Multi-language support
-- Integration with job boards
-- Advanced analytics dashboard
-- Team/collaboration features
-- Mobile application
+- [ ] **Multi-format Support**: Integrated support for LaTeX and raw text resumes.
+- [ ] **Direct Job Applications**: One-click apply through LinkedIn and Indeed integrations.
+- [ ] **Mock Interviewer**: AI-driven voice/text interview practice based on resume gaps.
+- [ ] **Enterprise Mode**: Team-based candidate screening for recruiters.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+We welcome contributions! Please fork the repository and submit a Pull Request. For major changes, please open an issue first.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License. Developed with ❤️ by Ghanshyam Jha.
