@@ -8,7 +8,6 @@ from datetime import datetime
 from ..database import get_db
 from ..models import Resume, User
 from ..auth.auth import get_current_user
-from ..services.resume_parser import parse_resume
 from ..config import settings
 
 router = APIRouter()
@@ -44,26 +43,10 @@ async def upload_resume(
     with open(file_path, "wb") as f:
         f.write(file_content)
     
-    # Parse resume content
-    try:
-        parsed_data = parse_resume(file_path)
-    except Exception as e:
-        # Clean up the file if parsing fails
-        os.remove(file_path)
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Failed to parse resume: {str(e)}"
-        )
-    
-    # Create resume record in database
+    # Create resume record in database using the exact strict model
     db_resume = Resume(
-        filename=file.filename,
-        file_path=file_path,
-        owner_id=current_user.id,
-        name=parsed_data.get('name'),
-        email=parsed_data.get('email'),
-        phone=parsed_data.get('phone'),
-        summary=parsed_data.get('summary')
+        user_id=current_user.id,
+        file_url=file_path
     )
     
     db.add(db_resume)
@@ -72,9 +55,9 @@ async def upload_resume(
     
     return {
         "id": db_resume.id,
-        "filename": db_resume.filename,
-        "uploaded_at": db_resume.uploaded_at,
-        "parsed_data": parsed_data
+        "resume_id": db_resume.id,
+        "filename": file.filename,
+        "uploaded_at": db_resume.created_at
     }
 
 @router.get("/history")
@@ -82,5 +65,19 @@ async def get_resume_history(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
-    resumes = db.query(Resume).filter(Resume.owner_id == current_user.id).order_by(Resume.uploaded_at.desc()).all()
-    return resumes
+    resumes = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).order_by(Resume.created_at.desc()).all()
+    
+    # Enrich with ATS Score
+    history = []
+    for r in resumes:
+        score = r.report.ats_score if r.report else None
+        history.append({
+            "id": r.id,
+            "filename": r.file_url.split("_", 1)[-1] if "_" in r.file_url else "resume.pdf",
+            "uploaded_at": r.created_at,
+            "ats_score": score
+        })
+        
+    return history

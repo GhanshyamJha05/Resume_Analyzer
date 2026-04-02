@@ -90,8 +90,8 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-6xl md:text-8xl font-black text-slate-950 tracking-tight leading-[1.1] mb-8"
           >
-            Your Resume, <br />
-            <span className="text-indigo-600">Supercharged.</span>
+            Check your resume <br />
+            <span className="text-indigo-600">ATS score instantly.</span>
           </motion.h1>
 
           <motion.p
@@ -247,6 +247,49 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="pricing" className="py-20 bg-slate-50 border-t border-slate-200">
+        <div className="container mx-auto px-6 max-w-5xl text-center">
+          <h2 className="text-4xl font-black text-slate-900 mb-4">Simple, transparent pricing</h2>
+          <p className="text-lg text-slate-600 mb-12">Choose the plan that fits your career goals.</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Card className="border shadow-lg bg-white relative overflow-hidden text-left p-2">
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold">Free</CardTitle>
+                <CardDescription>Perfect for a quick resume check.</CardDescription>
+                <div className="text-4xl font-black mt-4">₹0</div>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-center gap-3"><Check className="w-5 h-5 text-indigo-600" /> 1 AI Resume Analysis</li>
+                  <li className="flex items-center gap-3"><Check className="w-5 h-5 text-indigo-600" /> Basic ATS Score</li>
+                  <li className="flex items-center gap-3 text-slate-400"><Check className="w-5 h-5 opacity-50" /> Detailed Feedback</li>
+                  <li className="flex items-center gap-3 text-slate-400"><Check className="w-5 h-5 opacity-50" /> Job Description Match</li>
+                </ul>
+                <Button className="w-full bg-slate-100 text-slate-900 shadow-none hover:bg-slate-200">Current Plan</Button>
+              </CardContent>
+            </Card>
+            <Card className="border-2 border-indigo-600 shadow-xl bg-white relative overflow-hidden text-left p-2">
+              <div className="absolute top-0 right-0 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold">Premium</CardTitle>
+                <CardDescription>Maximize your interview chances.</CardDescription>
+                <div className="text-4xl font-black mt-4">₹99 <span className="text-base text-slate-500 font-normal">/ 3 reports</span></div>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-center gap-3"><Check className="w-5 h-5 text-indigo-600" /> 3 AI Resume Analyses</li>
+                  <li className="flex items-center gap-3"><Check className="w-5 h-5 text-indigo-600" /> Detailed Strengths & Weaknesses</li>
+                  <li className="flex items-center gap-3"><Check className="w-5 h-5 text-indigo-600" /> AI Bullet Improvements</li>
+                  <li className="flex items-center gap-3"><Check className="w-5 h-5 text-indigo-600" /> Job Description Match</li>
+                </ul>
+                <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white">Upgrade Now</Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-slate-950 text-white pt-24 pb-12">
         <div className="container mx-auto px-6">
@@ -282,7 +325,7 @@ export default function Home() {
               <h5 className="font-bold mb-6">Newsletter</h5>
               <p className="text-slate-400 text-sm mb-4">Get career tips delivered to your inbox.</p>
               <div className="flex gap-2">
-                <Input className="bg-white/10 border-white/10 text-white" placeholder="you@email.com" />
+                <input type="email" className="flex h-10 w-full rounded-md bg-white/10 border border-white/10 px-3 py-2 text-sm text-white placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" placeholder="you@email.com" />
                 <Button className="bg-indigo-600 hover:bg-indigo-700">Join</Button>
               </div>
             </div>

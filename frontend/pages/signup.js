@@ -3,12 +3,15 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Mail, Lock, User, Eye, EyeOff, Loader2, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/router';
+import { GoogleLogin } from '@react-oauth/google';
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox"; // Assuming Checkbox component exists or using default input
+
+import api from '@/utils/api';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -35,19 +38,34 @@ export default function SignupPage() {
     setError('');
 
     try {
-      // API call to register
-      // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, { ... });
-
-      // Simulate signup
-      await new Promise(resolve => setTimeout(resolve, 1500));
-
-      // Redirect to login
-      router.push('/login');
+      // register now returns {access_token}, so save it and go straight to dashboard
+      const data = await api.register(formData);
+      if (data.access_token && typeof window !== 'undefined') {
+        localStorage.setItem('auth_token', data.access_token);
+      }
+      router.push('/dashboard');
     } catch (err) {
-      setError('Registration failed. Please try again.');
+      setError(err.message || 'Registration failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      setIsLoading(true);
+      setError('');
+      await api.googleLogin(credentialResponse.credential);
+      router.push('/dashboard');
+    } catch (err) {
+      setError(err.message || 'Google authentication failed. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleError = () => {
+    setError('Google Sign-In was cancelled. If the button did not appear, GOOGLE_CLIENT_ID may not be set in .env.');
   };
 
   return (
@@ -67,6 +85,28 @@ export default function SignupPage() {
 
         <Card className="shadow-xl shadow-slate-200 border-0">
           <CardContent className="pt-8">
+            <div className="mb-6 flex justify-center w-full">
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={handleGoogleError}
+                useOneTap
+                width="100%"
+                size="large"
+                shape="rectangular"
+                theme="outline"
+                text="signup_with"
+              />
+            </div>
+
+            <div className="relative mb-6">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-slate-200" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase font-medium tracking-wide">
+                <span className="bg-white px-3 text-slate-500 rounded-full">Or continue with email</span>
+              </div>
+            </div>
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="username">Username</Label>

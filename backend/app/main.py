@@ -8,15 +8,11 @@ from .config import settings
 from .database import engine, get_db
 from . import models
 from .auth import auth
-from .routes import resume, analysis, jobs
+from .routes import resume, analysis
 from .models import User
 
 # Create database tables
 models.Base.metadata.create_all(bind=engine)
-
-# Import and run startup initialization
-from .startup import init_db
-init_db()
 
 app = FastAPI(
     title="AI Resume Analyzer API",
@@ -37,7 +33,6 @@ app.add_middleware(
 app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
 app.include_router(resume.router, prefix="/resume", tags=["Resume"])
 app.include_router(analysis.router, prefix="/analysis", tags=["Analysis"])
-app.include_router(jobs.router, prefix="/jobs", tags=["Jobs"])
 
 @app.get("/")
 async def root():

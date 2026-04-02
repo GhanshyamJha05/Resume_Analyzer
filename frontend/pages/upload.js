@@ -10,12 +10,15 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 
+import api from '@/utils/api';
+
 export default function UploadPage() {
   const [file, setFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [jobDescription, setJobDescription] = useState('');
   const router = useRouter();
 
   const handleFileChange = (e) => {
@@ -58,47 +61,31 @@ export default function UploadPage() {
     }
 
     setIsUploading(true);
-    setUploadProgress(0);
+    setUploadProgress(20);
     setError('');
     setSuccess('');
 
     try {
-      const formData = new FormData();
-      formData.append('file', file);
+      // 1. Upload Resume
+      setUploadProgress(40);
+      const uploadResult = await api.uploadResume(file);
 
-      // Simulate upload progress
-      const interval = setInterval(() => {
-        setUploadProgress(prev => {
-          if (prev >= 90) {
-            clearInterval(interval);
-            return 90;
-          }
-          return prev + 10;
-        });
-      }, 200);
+      setUploadProgress(60);
+      setSuccess('Resume uploaded successfully! Starting AI analysis...');
 
-      // In a real app, you would make an API call here
-      // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/resume/upload`, {
-      //   method: 'POST',
-      //   body: formData,
-      // });
+      // 2. Trigger Analysis
+      const analysisResult = await api.analyzeResume(uploadResult.resume_id, jobDescription);
 
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-
-      clearInterval(interval);
       setUploadProgress(100);
+      setSuccess('Analysis complete! Redirecting...');
 
-      // Simulate successful upload
-      setSuccess('Resume uploaded successfully! Analyzing...');
-
-      // Redirect to analysis page after a short delay
+      // Redirect to analysis page with the resume ID
       setTimeout(() => {
-        router.push('/analysis');
-      }, 1500);
+        router.push(`/analysis?id=${uploadResult.resume_id}`);
+      }, 1000);
 
     } catch (err) {
-      setError('Upload failed. Please try again.');
+      setError(err.message || 'Upload or analysis failed. Please try again.');
       console.error('Upload error:', err);
     } finally {
       setIsUploading(false);
@@ -203,6 +190,22 @@ export default function UploadPage() {
                     </Button>
                   )}
                 </div>
+              </div>
+
+              {/* Optional Job Description */}
+              <div className="px-8 pb-8 pt-4 border-t border-slate-100">
+                <label htmlFor="job-description" className="block text-sm font-semibold text-slate-700 mb-2">
+                  Target Job Description (Optional)
+                </label>
+                <textarea
+                  id="job-description"
+                  rows={4}
+                  className="w-full text-slate-900 border border-slate-200 rounded-xl p-4 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors shadow-sm bg-white"
+                  placeholder="Paste the job description here for an optimized ATS scan and keyword gap analysis against this specific role..."
+                  value={jobDescription}
+                  onChange={(e) => setJobDescription(e.target.value)}
+                  disabled={isUploading}
+                />
               </div>
 
               {/* Upload Progress */}

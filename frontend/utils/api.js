@@ -45,6 +45,9 @@ class ApiClient {
   }
 
   // Authentication methods
+  async getMe() {
+    return this.request('/auth/me');
+  }
   async login(credentials) {
     const response = await fetch(`${this.baseURL}/auth/token`, {
       method: 'POST',
@@ -64,6 +67,17 @@ class ApiClient {
 
     const data = await response.json();
     if (typeof window !== 'undefined') {
+      localStorage.setItem('auth_token', data.access_token);
+    }
+    return data;
+  }
+
+  async googleLogin(credential) {
+    const data = await this.request('/auth/google', {
+      method: 'POST',
+      body: JSON.stringify({ token: credential }),
+    });
+    if (typeof window !== 'undefined' && data.access_token) {
       localStorage.setItem('auth_token', data.access_token);
     }
     return data;
@@ -105,8 +119,12 @@ class ApiClient {
   }
 
   // Analysis methods
-  async analyzeResume(resumeId) {
-    return this.request(`/analysis/${resumeId}/analyze`, {
+  async analyzeResume(resumeId, jobDescription = "") {
+    let url = `/analysis/${resumeId}/analyze`;
+    if (jobDescription) {
+      url += `?job_description=${encodeURIComponent(jobDescription)}`;
+    }
+    return this.request(url, {
       method: 'POST',
     });
   }

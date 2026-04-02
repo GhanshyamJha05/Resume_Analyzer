@@ -3,11 +3,14 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Mail, Lock, Eye, EyeOff, Loader2, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/router';
+import { GoogleLogin } from '@react-oauth/google';
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+
+import api from '@/utils/api';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -33,30 +36,30 @@ export default function LoginPage() {
     setError('');
 
     try {
-      // API call to login
-      // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/token`, {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      //   body: new URLSearchParams({
-      //     username: formData.email, // backend expects username, but we allow email/username
-      //     password: formData.password
-      //   })
-      // });
-
-      // Check response...
-
-      // Simulate login for now
-      await new Promise(resolve => setTimeout(resolve, 1500));
-
-      // Store token (mock)
-      localStorage.setItem('token', 'mock-token');
-
+      await api.login(formData);
       router.push('/dashboard');
     } catch (err) {
-      setError('Invalid email or password');
+      setError(err.message || 'Invalid email or password');
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      setIsLoading(true);
+      setError('');
+      await api.googleLogin(credentialResponse.credential);
+      router.push('/dashboard');
+    } catch (err) {
+      setError(err.message || 'Google authentication failed. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleError = () => {
+    setError('Google authentication was cancelled or failed.');
   };
 
   return (
@@ -76,6 +79,27 @@ export default function LoginPage() {
 
         <Card className="shadow-xl shadow-slate-200 border-0">
           <CardContent className="pt-8">
+            <div className="mb-6 flex justify-center w-full">
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={handleGoogleError}
+                useOneTap
+                width="100%"
+                size="large"
+                shape="rectangular"
+                theme="outline"
+              />
+            </div>
+
+            <div className="relative mb-6">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-slate-200" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase font-medium tracking-wide">
+                <span className="bg-white px-3 text-slate-500 rounded-full">Or continue with email</span>
+              </div>
+            </div>
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="email">Email Address</Label>
