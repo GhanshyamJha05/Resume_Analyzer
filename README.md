@@ -1,4 +1,4 @@
-# 🚀 AI Resume Analyzer & Job Match Engine (Premium UI)
+# 🚀 AI Resume Analyzer & Job Match Engine
 
 <div align="center">
   <img src="https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js" alt="Next.js" />
@@ -112,4 +112,4 @@ We welcome contributions! Please fork the repository and submit a Pull Request. 
 
 ## 📄 License
 
-This project is licensed under the MIT License. Developed with ❤️ by Ghanshyam Jha.
+This project is licensed under the MIT License. Developed by Ghanshyam Jha.
