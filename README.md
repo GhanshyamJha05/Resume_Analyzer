@@ -14,7 +14,7 @@
 
 ---
 
-## 💎 Premium Design & UX
+##  Premium Design & UX
 
 Our platform is engineered with a focus on **visual excellence** and **intuitive user experience**:
 - **Glassmorphic UI**: Sleek, modern interface with subtle backdrop blurs and gradients.
@@ -22,20 +22,20 @@ Our platform is engineered with a focus on **visual excellence** and **intuitive
 - **Interactive Dashboards**: Real-time data visualization with Recharts.
 - **Responsive Design**: Flawless experience across desktop, tablet, and mobile.
 
-## 🌟 Core Features
+## Core Features
 
-### 🧠 AI-Powered Analysis
+###  AI-Powered Analysis
 - **Intelligent ATS Scoring**: Advanced algorithm evaluates resume structure and content against industry standards.
 - **NLP Skill Extraction**: Automatically identifies technical and soft skills using spaCy and modern transformers.
 - **AI Career Coaching**: Receive tailored improvement suggestions powered by OpenAI GPT-4.
 - **Bullet Point Optimizer**: Refines weak descriptions using the STAR method for maximum impact.
 
-### 🎯 Semantic Job Matching
+###  Semantic Job Matching
 - **Vector Embeddings**: Uses `all-MiniLM-L6-v2` for deep semantic understanding of your experience.
 - **Percentage Match Scoring**: Get a quantified compatibility score for various tech roles.
 - **Skill Gap Detection**: Highlights exactly what you need to learn to land your dream job.
 
-### 📊 Comprehensive Dashboard
+###  Comprehensive Dashboard
 - **Analysis History**: Securely tracks all your resume versions and improvements.
 - **Visual Analytics**: Interactive charts showing your career growth and score trends.
 - **Instant Previews**: Quick-look summaries of your most recent analysis.
@@ -50,7 +50,7 @@ Our platform is engineered with a focus on **visual excellence** and **intuitive
 | **AI / ML** | OpenAI GPT API, Sentence Transformers (NLP), spaCy |
 | **DevOps** | Docker, Docker Compose, GitHub Actions |
 
-## 📁 Project Structure
+##  Project Structure
 
 ```bash
 root/
@@ -70,7 +70,7 @@ root/
 └── requirements.txt          # Backend dependencies
 ```
 
-## 🚀 Rapid Setup
+##  Rapid Setup
 
 ### 1. Backend Configuration
 ```bash
@@ -99,14 +99,14 @@ npm run dev
 docker-compose up --build
 ```
 
-## 🤖 Future Roadmap
+##  Future Roadmap
 
 - [ ] **Multi-format Support**: Integrated support for LaTeX and raw text resumes.
 - [ ] **Direct Job Applications**: One-click apply through LinkedIn and Indeed integrations.
 - [ ] **Mock Interviewer**: AI-driven voice/text interview practice based on resume gaps.
 - [ ] **Enterprise Mode**: Team-based candidate screening for recruiters.
 
-## 🤝 Contributing
+##  Contributing
 
 We welcome contributions! Please fork the repository and submit a Pull Request. For major changes, please open an issue first.
 
