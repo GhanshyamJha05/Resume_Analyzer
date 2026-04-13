@@ -9,7 +9,7 @@
 </div>
 
 <p align="center">
-  <b>A state-of-the-art AI-powered platform for resume analysis, ATS scoring, and semantic job matching.</b>
+  <b>A state-of-the-art AI-powered platform for resume analysis, ATS scoring, and semantic job matching</b>
 </p>
 
 ---
