@@ -1,4 +1,4 @@
-# 🚀 AI Resume Analyzer & Job Match Engine 
+# 🚀 AI Resume Analyzer 
 
 <div align="center">
   <img src="https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js" alt="Next.js" />
