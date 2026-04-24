@@ -1,4 +1,4 @@
-# 🚀 AI Resume Analyzer and ATS Evaluator
+# 🚀 AI Resume Analyzer and ATS Score Evaluator
 
 <div align="center">
   <img src="https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js" alt="Next.js" />
